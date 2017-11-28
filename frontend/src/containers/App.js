@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
+import { fetchCategories, fetchPosts } from '../utils/ReadableAPI';
 
 class App extends Component {
+  componentDidMount() {
+    fetchCategories();
+    fetchPosts();
+  }
+
   render() {
     return (
       <div className="App">
