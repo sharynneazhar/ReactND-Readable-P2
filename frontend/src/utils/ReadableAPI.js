@@ -20,7 +20,7 @@ export const fetchCategories = () =>
 // Posts
 export const fetchPosts = category => {
   const url = category ? `${api}/${category}/posts` : `${api}/posts`
-  fetch(url, { headers })
+  return fetch(url, { headers })
     .then(res => res.json())
     .then(data => data)
 }
@@ -36,7 +36,7 @@ export const addPost = post => {
     timestamp: Date.now()
   }
 
-  fetch(`${api}/posts`, {
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers,
     body: JSON.stringify(data)
@@ -58,7 +58,7 @@ export const updatePost = post => {
     timestamp: Date.now()
   }
 
-  fetch(`${api}/posts/${post.id}`, {
+  return fetch(`${api}/posts/${post.id}`, {
     method: 'PUT',
     headers,
     body: JSON.stringify(data)
@@ -74,11 +74,10 @@ export const removePost = id =>
     .then(data => data)
 
 // Comments
-export const fetchComments = id => {
+export const fetchComments = id =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
     .then(data => data)
-}
 
 export const fetchComment = id =>
   fetch(`${api}/comments/${id}`, { headers })
@@ -91,7 +90,7 @@ export const addComment = comment => {
     timestamp: Date.now()
   }
 
-  fetch(`${api}/comments`, {
+  return fetch(`${api}/comments`, {
     method: 'POST',
     headers,
     body: JSON.stringify(data)
@@ -113,7 +112,7 @@ export const updateComment = comment => {
     timestamp: Date.now()
   }
 
-  fetch(`${api}/comments/${comment.id}`, {
+  return fetch(`${api}/comments/${comment.id}`, {
     method: 'PUT',
     headers,
     body: JSON.stringify(data)

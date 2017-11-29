@@ -6,7 +6,6 @@ import { capitalize } from '../utils/helpers';
 import {
   Nav,
   Navbar,
-  NavItem,
   NavDropdown,
   MenuItem
 } from 'react-bootstrap';
@@ -30,7 +29,13 @@ class Header extends Component {
           <Nav>
             <NavDropdown eventKey={1} title="Categories" id="basic-nav-dropdown">
               {categories.length > 0 && categories.map((category, key) => (
-                <MenuItem eventKey={key}>{capitalize(category.name)}</MenuItem>
+                <MenuItem
+                  key={key}
+                  eventKey={key}
+                  href={`/${category.name}`}
+                >
+                  {capitalize(category.name)}
+                </MenuItem>
               ))}
             </NavDropdown>
           </Nav>
