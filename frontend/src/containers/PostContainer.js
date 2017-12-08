@@ -1,39 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import { Layout } from 'antd';
 import { fetchPosts } from '../actions/posts';
-import { capitalize } from '../utils/helpers';
-import {
-  Grid,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem
-} from 'react-bootstrap';
+import Header from '../components/Header';
+import NoPosts from '../components/NoPosts';
 
 const PostItem = props => {
   const { post } = props;
   return (
-    <li
-      className="list-group-item"
-      onClick={() => {}}
-    >
-      <Grid>
-      <Row className="show-grid">
-        <Col xs={2} md={1} className="text-center">
-          <h1>{post.voteScore}</h1>
-        </Col>
-        <Col xs={10} md={11}>
-          <h3>{post.title}</h3>
-          <p>
-            Category: {post.category} |
-            Date Posted: <Moment format="dddd, MMM Do YYYY, h:mm:ss A">{post.timestamp}</Moment>
-          </p>
-          <p>{post.body}</p>
-          <p><em>Comments: {post.commentCount}</em></p>
-        </Col>
-      </Row>
-      </Grid>
+    <li className="list-group-item" onClick={() => {}}>
+      <div>
+        <div>
+          <div>
+            <h1>{post.voteScore}</h1>
+          </div>
+          <div>
+            <h3>{post.title}</h3>
+            <p>
+              Category: {post.category} |
+              Date Posted: <Moment format="dddd, MMM Do YYYY, h:mm:ss A">{post.timestamp}</Moment>
+            </p>
+            <p>{post.body}</p>
+            <p><em>Comments: {post.commentCount}</em></p>
+          </div>
+        </div>
+      </div>
     </li>
   )
 }
@@ -51,18 +43,31 @@ class PostContainer extends Component {
     }
   }
 
+  renderPosts = (posts, category) => {
+    if (posts.length > 0) {
+      return posts.map((post, key) => <PostItem key={key} post={post} />)
+    }
+    return <NoPosts category={category} />
+  }
+
   render() {
     const { posts, match } = this.props;
+    const category = match.params.category;
     return (
-      <ListGroup>
-        {posts.length > 0 ? posts.map((post, key) => (
-          <PostItem key={key} post={post} />
-        )) : (
-          <div>
-            <h2>No posts in {match.params.category && capitalize(match.params.category)}.</h2>
-          </div>
-        )}
-      </ListGroup>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Header />
+        <Layout>
+          <Layout.Content style={{ margin: 20 }}>
+            <div style={{
+              padding: 24,
+              background: '#fff',
+              minHeight: 360
+            }}>
+              {this.renderPosts(posts, category)}
+            </div>
+          </Layout.Content>
+        </Layout>
+      </Layout>
     );
   }
 }

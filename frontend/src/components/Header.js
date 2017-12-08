@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../actions/categories';
 import { capitalize } from '../utils/helpers';
-import {
-  Nav,
-  Navbar,
-  NavDropdown,
-  MenuItem
-} from 'react-bootstrap';
+import { Layout, Menu } from 'antd';
 
 class Header extends Component {
   componentDidMount() {
@@ -18,29 +13,25 @@ class Header extends Component {
   render() {
     const { categories } = this.props;
     return (
-      <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Readable</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavDropdown eventKey={1} title="Categories" id="basic-nav-dropdown">
-              {categories.length > 0 && categories.map((category, key) => (
-                <MenuItem
-                  key={key}
-                  eventKey={key}
-                  href={`/${category.name}`}
-                >
-                  {capitalize(category.name)}
-                </MenuItem>
-              ))}
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <Layout.Sider>
+        <Layout.Header style={{
+          paddingLeft: 16,
+          fontSize: 22,
+          color: '#fff'
+        }}>
+          Readable
+        </Layout.Header>
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+          <Menu.Item key="1">
+            <Link to="/">All</Link>
+          </Menu.Item>
+          {categories.length > 0 && categories.map((category, key) => (
+            <Menu.Item key={key + 2}>
+              <Link to={`/${category.name}`}>{capitalize(category.name)}</Link>
+            </Menu.Item>
+          ))}
+        </Menu>
+      </Layout.Sider>
     );
   }
 }
