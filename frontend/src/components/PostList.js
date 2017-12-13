@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Moment from 'moment';
-import { List, Icon, Tag } from 'antd';
+import { List, Icon } from 'antd';
 import { capitalize, sortByDate, sortByVotes } from '../utils/helpers';
-
-const IconText = ({ type, type2, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {type2 ? <Icon type={type2} style={{ marginRight: 8 }} /> : ''}
-    {text}
-  </span>
-);
 
 class PostList extends Component {
   sortPosts = (posts, sortBy) => {
     return sortBy === "votes" ? sortByVotes(posts) : sortByDate(posts);
   }
+
+  renderVotes = (votes) => (
+    <span>
+      <Icon type="like-o" style={{ marginRight: 8 }} />
+      <Icon type="dislike-o" style={{ marginRight: 10 }} />
+      {votes}
+    </span>
+  )
+
+  renderCommentCount = (commentCount) => (
+    <span>
+      <Icon type="message" style={{ marginRight: 10 }} />
+      {commentCount}
+    </span>
+  )
 
   render() {
     const { posts, sortBy } = this.props;
@@ -28,18 +36,25 @@ class PostList extends Component {
         renderItem={post => (
           <List.Item
             key={post.id}
-            style={{ padding: 20 }}
+            style={{ padding: 14 }}
             actions={[
-              <IconText type="like-o" type2="dislike-o" text={post.voteScore} />,
-              <IconText type="message" text={post.commentCount} />,
-              <Tag>{capitalize(post.category)}</Tag>
+              this.renderVotes(post.voteScore),
+              this.renderCommentCount(post.commentCount)
             ]}
           >
             <List.Item.Meta
-              title={post.title}
-              description={`Submitted ${Moment(post.timestamp).fromNow()} by ${post.author}`}
+              title={
+                <Link to={`/${post.category}/${post.id}`} style={{ color: '#1890ff'}}>
+                  {post.title}
+                </Link>
+              }
+              description={
+                <span>
+                  {`Posted ${Moment(post.timestamp).fromNow()} by ${post.author} to `}
+                  <Link to={`/${post.category}`}>{capitalize(post.category)}</Link>
+                </span>
+              }
             />
-            {post.body}
           </List.Item>
         )}
       />

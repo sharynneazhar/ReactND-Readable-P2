@@ -5,3 +5,33 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 12px;
+  border: 0.5px solid #e2e2e2;
+  background-color: #e2e2e2;
+  color: #e2e2e2;
+}
+
+/* Override list item styles */
+.ant-list-vertical .ant-list-item-meta-content {
+  margin-bottom: 10px;
+}
+
+.ant-list-vertical .ant-list-item-meta,
+.ant-list-vertical .ant-list-item-meta-title {
+  margin-bottom: 0;
+}
+
+.ant-list-vertical .ant-list-item-action {
+  margin-left: 3px;
+}
+
+.ant-list-vertical .ant-list-item-meta-title {
+  font-size: 18px;
+}
+
+.ant-list-vertical .ant-list-item-meta-description {
+  font-size: 12px;
+}

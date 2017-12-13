@@ -1,4 +1,4 @@
-import { REQUEST_CATEGORIES, RECEIVE_CATEGORIES } from '../actions/constants';
+import { RECEIVE_CATEGORIES } from '../actions/constants';
 
 const categories = (state = {}, action) => {
   const { categories } = action;
