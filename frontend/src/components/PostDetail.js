@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, List, Button, Input } from 'antd';
-import { capitalize, calculateDate, displayVotes } from '../utils/helpers';
+import { capitalize, calculateDate, displayVotes, sortByDate } from '../utils/helpers';
 
 class PostDetail extends Component {
   render() {
@@ -40,44 +40,46 @@ class PostDetail extends Component {
                 Post
               </Button>
             </div>
-            <List
-              itemLayout="vertical"
-              size="small"
-              dataSource={comments}
-              renderItem={comment => (
-                <List.Item
-                  key={comment.id}
-                  actions={[
-                    <Link
-                      to=""
-                      style={{
-                        color: "#666",
-                        fontSize: 12,
-                        fontWeight: 600
-                      }}
-                    >
-                      Edit
-                    </Link>,
-                    <Link
-                      to=""
-                      style={{
-                        color: "#666",
-                        fontSize: 12,
-                        fontWeight: 600
-                      }}
-                    >
-                      Delete
-                    </Link>,
-                    displayVotes(comment.voteScore)
-                  ]}
-                >
-                  <List.Item.Meta
-                    description={`Posted on ${calculateDate(comment.timestamp)} by ${comment.author}`}
-                  />
-                  {comment.body}
-                </List.Item>
-              )}
-            />
+            {comments.length > 0 &&
+              <List
+                itemLayout="vertical"
+                size="small"
+                dataSource={sortByDate(comments)}
+                renderItem={comment => (
+                  <List.Item
+                    key={comment.id}
+                    actions={[
+                      <Link
+                        to=""
+                        style={{
+                          color: "#666",
+                          fontSize: 12,
+                          fontWeight: 600
+                        }}
+                      >
+                        Edit
+                      </Link>,
+                      <Link
+                        to=""
+                        style={{
+                          color: "#666",
+                          fontSize: 12,
+                          fontWeight: 600
+                        }}
+                      >
+                        Delete
+                      </Link>,
+                      displayVotes(comment.voteScore)
+                    ]}
+                  >
+                    <List.Item.Meta
+                      description={`Posted on ${calculateDate(comment.timestamp)} by ${comment.author}`}
+                    />
+                    {comment.body}
+                  </List.Item>
+                )}
+              />
+            }
           </Col>
         </Row>
       </div>
