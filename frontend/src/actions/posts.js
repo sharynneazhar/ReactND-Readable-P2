@@ -1,11 +1,11 @@
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { REQUEST_POSTS, RECEIVE_POSTS } from './constants';
-
-export const requestPosts = () => {
-  return {
-    type: REQUEST_POSTS,
-  }
-}
+import {
+  RECEIVE_POSTS,
+  RECEIVE_POST,
+  // ADD_POST,
+  // DELETE_POST,
+  // EDIT_POST,
+} from './constants';
 
 export const receivePosts = (posts) => {
   return {
@@ -16,8 +16,21 @@ export const receivePosts = (posts) => {
 
 export const fetchPosts = (category) => {
   return dispatch => {
-    dispatch(requestPosts());
     return ReadableAPI.fetchPosts(category)
       .then(posts => dispatch(receivePosts(posts)))
+  }
+}
+
+export const receivePost = (post) => {
+  return {
+    type: RECEIVE_POST,
+    post
+  }
+}
+
+export const fetchPost = (id) => {
+  return dispatch => {
+    return ReadableAPI.fetchPost(id)
+      .then(post => dispatch(receivePost(post)))
   }
 }
