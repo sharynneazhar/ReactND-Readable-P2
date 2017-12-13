@@ -19,15 +19,21 @@ class Header extends Component {
           fontSize: 22,
           color: '#fff'
         }}>
-          Readable
+          <Link to="/" style={{ color: '#fff' }}>Readable</Link>
         </Layout.Header>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={['1']}
+          mode="inline"
+        >
           <Menu.Item key="1">
             <Link to="/">All</Link>
           </Menu.Item>
           {categories.length > 0 && categories.map((category, key) => (
             <Menu.Item key={key + 2}>
-              <Link to={`/${category.name}`}>{capitalize(category.name)}</Link>
+              <Link to={`/${category.name}`}>
+                {capitalize(category.name)}
+              </Link>
             </Menu.Item>
           ))}
         </Menu>
