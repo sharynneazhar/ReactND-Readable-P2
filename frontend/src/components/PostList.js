@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Moment from 'moment';
 import { List, Icon } from 'antd';
-import { capitalize, sortByDate, sortByVotes } from '../utils/helpers';
+import {
+  capitalize,
+  calculateDate,
+  sortByDate,
+  sortByVotes,
+  displayVotes,
+} from '../utils/helpers';
 
 class PostList extends Component {
   sortPosts = (posts, sortBy) => {
     return sortBy === "votes" ? sortByVotes(posts) : sortByDate(posts);
   }
-
-  renderVotes = (votes) => (
-    <span>
-      <Icon type="like-o" style={{ marginRight: 8 }} />
-      <Icon type="dislike-o" style={{ marginRight: 10 }} />
-      {votes}
-    </span>
-  )
 
   renderCommentCount = (commentCount) => (
     <span>
@@ -38,7 +35,7 @@ class PostList extends Component {
             key={post.id}
             style={{ padding: 14 }}
             actions={[
-              this.renderVotes(post.voteScore),
+              displayVotes(post.voteScore),
               this.renderCommentCount(post.commentCount)
             ]}
           >
@@ -50,7 +47,7 @@ class PostList extends Component {
               }
               description={
                 <span>
-                  {`Posted ${Moment(post.timestamp).fromNow()} by ${post.author} to `}
+                  {`Posted ${calculateDate(post.timestamp)} by ${post.author} to `}
                   <Link to={`/${post.category}`}>{capitalize(post.category)}</Link>
                 </span>
               }

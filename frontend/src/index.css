@@ -7,16 +7,16 @@ body {
 }
 
 hr {
-  margin-top: 20px;
-  margin-bottom: 12px;
+  margin-top: 15px;
   border: 0.5px solid #e2e2e2;
   background-color: #e2e2e2;
   color: #e2e2e2;
 }
 
 /* Override list item styles */
-.ant-list-vertical .ant-list-item-meta-content {
-  margin-bottom: 10px;
+.ant-list-vertical .ant-list-item-content {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .ant-list-vertical .ant-list-item-meta,
@@ -25,6 +25,7 @@ hr {
 }
 
 .ant-list-vertical .ant-list-item-action {
+  margin-top: 3px;
   margin-left: 3px;
 }
 

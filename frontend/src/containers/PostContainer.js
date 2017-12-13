@@ -67,8 +67,8 @@ class PostContainer extends Component {
             lineHeight: '12px'
           }}>
             <Row type="flex" align="middle" justify="space-between">
-              <Col span={12}>{this.renderBreadcrumb(category)}</Col>
-              <Col span={12} style={{ textAlign: 'right' }}>
+              <Col span={18}>{this.renderBreadcrumb(category)}</Col>
+              <Col span={6} style={{ textAlign: 'right' }}>
                 <Button type="primary" icon="plus">Add New Post</Button>
               </Col>
             </Row>
