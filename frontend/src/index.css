@@ -14,11 +14,6 @@ hr {
 }
 
 /* Override list item styles */
-.ant-list-vertical .ant-list-item-content {
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
 .ant-list-vertical .ant-list-item-meta,
 .ant-list-vertical .ant-list-item-meta-title {
   margin-bottom: 0;
@@ -34,5 +29,7 @@ hr {
 }
 
 .ant-list-vertical .ant-list-item-meta-description {
-  font-size: 12px;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }

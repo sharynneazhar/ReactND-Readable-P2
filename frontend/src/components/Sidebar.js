@@ -5,7 +5,7 @@ import { fetchCategories } from '../actions/categories';
 import { capitalize } from '../utils/helpers';
 import { Layout, Menu } from 'antd';
 
-class Header extends Component {
+class Sidebar extends Component {
   componentDidMount() {
     this.props.fetchCategories();
   }
@@ -50,4 +50,4 @@ const mapDispatchToProps = dispatch => ({
   fetchCategories: () => dispatch(fetchCategories()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Icon } from 'antd';
+import { Layout, Icon } from 'antd';
 import { fetchPost } from '../actions/posts';
 import { fetchComments } from '../actions/comments';
-import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 import PostDetail from '../components/PostDetail';
 
 class PostDetailContainer extends Component {
@@ -14,46 +14,47 @@ class PostDetailContainer extends Component {
     this.props.fetchComments(id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      const id = nextProps.match.params.id;
-      this.props.fetchPost(id);
-      this.props.fetchComments(id);
-    }
-  }
-
   render() {
     const { post, comments } = this.props;
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Header />
+      <Layout style={styles.layout}>
+        <Sidebar />
         <Layout>
-          <Layout.Header style={{
-            height: 72,
-            marginLeft: 20,
-            marginRight: 20,
-            padding: '20px',
-            backgroundColor: '#fff',
-            lineHeight: '12px'
-          }}>
-            <Row type="flex" align="middle" justify="start">
-              <Col span={12}>
-                <Link to="/">
-                  <Icon type="arrow-left" style={{ marginRight: 8 }} />
-                  Go Back
-                </Link>
-              </Col>
-            </Row>
+          <Layout.Header style={styles.layoutHeader}>
+            <Link to="/">
+              <Icon type="arrow-left" style={styles.icon} />
+              Go Back
+            </Link>
           </Layout.Header>
-          <Layout.Content style={{ margin: 20 }}>
-            <div style={{ background: '#fff' }}>
-              {post && <PostDetail post={post} comments={comments} />}
-            </div>
+          <Layout.Content style={styles.layoutContent}>
+            {post && <PostDetail post={post} comments={comments} />}
           </Layout.Content>
         </Layout>
       </Layout>
     );
   }
+}
+
+const styles = {
+  layout: {
+    minHeight: '100vh',
+  },
+  layoutHeader: {
+    height: 72,
+    display: 'flex',
+    alignItems: 'center',
+    marginLeft: 20,
+    marginRight: 20,
+    padding: 20,
+    backgroundColor: '#fff',
+    lineHeight: '12px',
+  },
+  layoutContent: {
+    margin: 20,
+  },
+  icon: {
+    marginRight: 8,
+  },
 }
 
 const mapStateToProps = ({ posts, comments }) => ({
