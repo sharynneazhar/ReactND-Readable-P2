@@ -48,3 +48,41 @@ export const votePostDetail = (id, option) => {
         })))
   }
 }
+
+export const addPost = (post) => {
+  post = {
+    ...post,
+    timestamp: Date.now(),
+  };
+
+  return dispatch => {
+    return ReadableAPI.addPost(post)
+      .then(post => ReadableAPI.fetchPosts(post.category)
+        .then(posts => dispatch({
+          type: RECEIVE_POSTS,
+          posts
+        })))
+  }
+}
+
+export const editPost = (post) => {
+  return dispatch => {
+    return ReadableAPI.editPost(post)
+      .then(post => ReadableAPI.fetchPosts(post.category)
+        .then(posts => dispatch({
+          type: RECEIVE_POSTS,
+          posts
+        })))
+  }
+}
+
+export const deletePost = (post) => {
+  return dispatch => {
+    return ReadableAPI.deletePost(post)
+      .then(post => ReadableAPI.fetchPosts()
+        .then(posts => dispatch({
+          type: RECEIVE_POSTS,
+          posts
+        })))
+  }
+}

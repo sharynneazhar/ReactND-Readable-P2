@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { List, Icon } from 'antd';
+import { List, Icon, Button } from 'antd';
 import Voter from '../components/Voter';
 import {
   capitalize,
@@ -41,8 +41,19 @@ class PostList extends Component {
             style={styles.listItem}
             actions={[
               <Voter item={post} />,
-              <Link to="#" style={styles.actionText}>Edit</Link>,
-              <Link to="#" style={styles.actionText}>Delete</Link>,
+              <Link to={{ pathname: '/edit', state: { post } }}>
+                <Button size="small" type="dashed" style={styles.actionText}>
+                  Edit
+                </Button>
+              </Link>,
+              <Button
+                size="small"
+                type="dashed"
+                style={styles.actionText}
+                onClick={() => this.props.deletePost(post)}
+              >
+                Delete
+              </Button>,
               this.renderCommentCount(post.commentCount)
             ]}
           >
@@ -79,6 +90,7 @@ const styles = {
     color: '#1890ff',
   },
   actionText: {
+    border: 'none',
     color: "#666",
     fontSize: 12,
     fontWeight: 600,

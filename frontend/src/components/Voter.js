@@ -60,7 +60,9 @@ class Voter extends Component {
 
 const styles = {
   icon: {
+    border: 'none',
     marginRight: 12,
+    padding: 0,
   },
   posVotes: {
     marginRight: 8,

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout, Row, Col, Button } from 'antd';
-import { fetchPosts } from '../actions/posts';
+import { fetchPosts, deletePost } from '../actions/posts';
 import Sidebar from '../components/Sidebar';
 import SortBy from '../components/SortBy';
 import Breadcrumb from '../components/Breadcrumb';
@@ -32,6 +33,7 @@ class PostContainer extends Component {
           posts={posts}
           category={category}
           sortBy={this.state.sortBy}
+          deletePost={this.props.deletePost}
         />
       )
     }
@@ -51,7 +53,11 @@ class PostContainer extends Component {
         <Layout>
           <Layout.Header style={styles.layoutHeader}>
             <Breadcrumb category={category} />
-            <Button type="primary" icon="plus" size="small">Add New Post</Button>
+            <Link to="/new">
+              <Button type="primary" icon="plus" size="small">
+                Add New Post
+              </Button>
+            </Link>
           </Layout.Header>
           <Layout.Content style={styles.layoutContent}>
             <Row>
@@ -101,6 +107,7 @@ const mapStateToProps = ({ posts }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts: category => dispatch(fetchPosts(category)),
+  deletePost: post => dispatch(deletePost(post)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

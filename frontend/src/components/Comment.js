@@ -117,6 +117,7 @@ class Comment extends Component {
 
 const styles = {
   actionText: {
+    border: 'none',
     color: "#666",
     fontSize: 12,
     fontWeight: 600,

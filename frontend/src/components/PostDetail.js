@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import { Row, Col } from 'antd';
 import CommentsContainer from '../containers/CommentsContainer';
 import Voter from '../components/Voter';
@@ -25,7 +26,9 @@ class PostDetail extends Component {
             <Link to={`/${post.category}`}>{capitalize(post.category)}</Link>
           </div>
           <hr />
-          <div style={styles.content}>{post.body}</div>
+          <div style={styles.content}>
+            <ReactMarkdown source={post.body} />
+          </div>
         </div>
         <CommentsContainer comments={comments} />
       </div>

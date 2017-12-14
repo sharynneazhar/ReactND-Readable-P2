@@ -54,7 +54,7 @@ export const addPost = post => {
     .then(data => data)
 }
 
-export const updatePost = post => {
+export const editPost = post => {
   const data = {
     ...post,
     timestamp: Date.now()
@@ -68,8 +68,8 @@ export const updatePost = post => {
     .then(data => data)
 }
 
-export const removePost = id =>
-  fetch(`${api}/posts/${id}`, {
+export const deletePost = post =>
+  fetch(`${api}/posts/${post.id}`, {
     method: 'DELETE',
     headers,
   }).then(res => res.json())

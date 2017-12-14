@@ -9,9 +9,11 @@ const Breadcrumb = ({ category }) => (
       <Link to="/">Home</Link>
     </AntBreadcrumb.Item>
     <AntBreadcrumb.Item>
-      <Link to={`/${category}`}>
-        {category && capitalize(category)}
-      </Link>
+      {category && category.includes('Post') ? category :
+        <Link to={`/${category}`}>
+          {category && capitalize(category)}
+        </Link>
+      }
     </AntBreadcrumb.Item>
   </AntBreadcrumb>
 )
