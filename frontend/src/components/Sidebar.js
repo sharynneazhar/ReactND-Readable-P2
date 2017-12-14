@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../actions/categories';
 import { capitalize } from '../utils/helpers';
-import logo from '../logo.png';
 import { Layout, Menu } from 'antd';
 
 class Sidebar extends Component {
