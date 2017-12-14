@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../actions/categories';
 import { capitalize } from '../utils/helpers';
+import logo from '../logo.png';
 import { Layout, Menu } from 'antd';
 
 class Sidebar extends Component {
@@ -14,12 +15,8 @@ class Sidebar extends Component {
     const { categories } = this.props;
     return (
       <Layout.Sider>
-        <Layout.Header style={{
-          paddingLeft: 16,
-          fontSize: 22,
-          color: '#fff'
-        }}>
-          <Link to="/" style={{ color: '#fff' }}>Readable</Link>
+        <Layout.Header style={styles.header}>
+          <Link to="/" style={styles.logoLink}>Readable</Link>
         </Layout.Header>
         <Menu
           theme="dark"
@@ -40,6 +37,17 @@ class Sidebar extends Component {
       </Layout.Sider>
     );
   }
+}
+
+const styles = {
+  header: {
+    paddingLeft: 16,
+    color: '#fff'
+  },
+  logoLink: {
+    fontSize: 24,
+    color: '#fff',
+  },
 }
 
 const mapStateToProps = ({ categories }) => ({
