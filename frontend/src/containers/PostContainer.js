@@ -13,21 +13,24 @@ class PostContainer extends Component {
     sortBy: 'date'
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const category = this.props.match.params.category;
-    this.props.fetchPosts(category);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.category !== this.props.match.params.category) {
-      const category = nextProps.match.params.category;
+    if (category) {
       this.props.fetchPosts(category);
+    } else {
+      this.props.fetchPosts();
     }
   }
 
   renderPosts = (posts, category) => {
     if (posts.length > 0) {
-      return <PostList posts={posts} category={category} sortBy={this.state.sortBy} />
+      return (
+        <PostList
+          posts={posts}
+          category={category}
+          sortBy={this.state.sortBy}
+        />
+      )
     }
     return <NoPosts category={category} />
   }

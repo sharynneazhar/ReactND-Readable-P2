@@ -17,7 +17,7 @@ class PostList extends Component {
   renderCommentCount = (commentCount) => (
     <span>
       <Icon type="message" style={{ marginRight: 10 }} />
-      {commentCount}
+      {commentCount} comments
     </span>
   )
 
@@ -40,7 +40,7 @@ class PostList extends Component {
             key={post.id}
             style={styles.listItem}
             actions={[
-              <Voter votes={post.voteScore} />,
+              <Voter item={post} />,
               this.renderCommentCount(post.commentCount)
             ]}
           >

@@ -10,7 +10,7 @@ const Comment = ({ comment }) => (
     actions={[
       <Link to="#" style={styles.actionText}>Edit</Link>,
       <Link to="#" style={styles.actionText}>Delete</Link>,
-      <Voter votes={comment.voteScore} />
+      <Voter item={comment} />
     ]}
   >
     <List.Item.Meta

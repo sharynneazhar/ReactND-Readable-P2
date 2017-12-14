@@ -3,7 +3,7 @@ import {
   RECEIVE_POST,
   // ADD_POST,
   // DELETE_POST,
-  // EDIT_POST,
+  // EDIT_POST
 } from '../actions/constants';
 
 const posts = (state = {}, action) => {

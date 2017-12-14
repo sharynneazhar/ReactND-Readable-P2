@@ -16,7 +16,7 @@ class PostDetail extends Component {
               {post.title}
             </Col>
             <Col span={6} style={styles.votes}>
-              <Voter votes={post.voteScore} />
+              <Voter item={post} single />
             </Col>
           </Row>
           <div style={styles.meta}>

@@ -7,30 +7,44 @@ import {
   // EDIT_POST,
 } from './constants';
 
-export const receivePosts = (posts) => {
-  return {
-    type: RECEIVE_POSTS,
-    posts
-  }
-}
-
 export const fetchPosts = (category) => {
   return dispatch => {
     return ReadableAPI.fetchPosts(category)
-      .then(posts => dispatch(receivePosts(posts)))
-  }
-}
-
-export const receivePost = (post) => {
-  return {
-    type: RECEIVE_POST,
-    post
+      .then(posts => dispatch({
+        type: RECEIVE_POSTS,
+        posts
+      }))
   }
 }
 
 export const fetchPost = (id) => {
   return dispatch => {
     return ReadableAPI.fetchPost(id)
-      .then(post => dispatch(receivePost(post)))
+      .then(post => dispatch({
+        type: RECEIVE_POST,
+        post
+      }))
+  }
+}
+
+export const votePost = (id, option) => {
+  return dispatch => {
+    return ReadableAPI.votePost(id, option)
+      .then(post => ReadableAPI.fetchPosts()
+        .then(posts => dispatch({
+          type: RECEIVE_POSTS,
+          posts
+        })))
+  }
+}
+
+export const votePostDetail = (id, option) => {
+  return dispatch => {
+    return ReadableAPI.votePost(id, option)
+      .then(post => ReadableAPI.fetchPost(post.id)
+        .then(post => dispatch({
+          type: RECEIVE_POST,
+          post
+        })))
   }
 }

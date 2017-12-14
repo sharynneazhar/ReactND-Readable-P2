@@ -30,6 +30,16 @@ export const fetchPost = id =>
     .then(res => res.json())
     .then(data => data)
 
+export const votePost = (id, vote) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      option: vote
+    })
+  }).then(res => res.json())
+    .then(data => data)
+
 export const addPost = post => {
   const data = {
     ...post,
@@ -43,14 +53,6 @@ export const addPost = post => {
   }).then(res => res.json())
     .then(data => data)
 }
-
-export const votePost = (id, option) =>
-  fetch(`${api}/posts/${id}`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ option })
-  }).then(res => res.json())
-    .then(data => data)
 
 export const updatePost = post => {
   const data = {
