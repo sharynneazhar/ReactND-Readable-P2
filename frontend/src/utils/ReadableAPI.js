@@ -108,7 +108,7 @@ export const voteComment = (id, option) =>
   }).then(res => res.json())
     .then(data => data)
 
-export const updateComment = comment => {
+export const editComment = comment => {
   const data = {
     ...comment,
     timestamp: Date.now()
@@ -122,7 +122,7 @@ export const updateComment = comment => {
     .then(data => data)
 }
 
-export const removeComment = comment =>
+export const deleteComment = comment =>
   fetch(`${api}/comments/${comment.id}`, {
     method: 'DELETE',
     headers,

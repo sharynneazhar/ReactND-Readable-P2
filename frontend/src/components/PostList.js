@@ -41,6 +41,8 @@ class PostList extends Component {
             style={styles.listItem}
             actions={[
               <Voter item={post} />,
+              <Link to="#" style={styles.actionText}>Edit</Link>,
+              <Link to="#" style={styles.actionText}>Delete</Link>,
               this.renderCommentCount(post.commentCount)
             ]}
           >
@@ -75,6 +77,11 @@ const styles = {
   },
   title: {
     color: '#1890ff',
+  },
+  actionText: {
+    color: "#666",
+    fontSize: 12,
+    fontWeight: 600,
   },
 }
 

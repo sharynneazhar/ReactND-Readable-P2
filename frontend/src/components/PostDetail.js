@@ -27,7 +27,7 @@ class PostDetail extends Component {
           <hr />
           <div style={styles.content}>{post.body}</div>
         </div>
-        {comments.length > 0 && <CommentsContainer comments={comments} />}
+        <CommentsContainer comments={comments} />
       </div>
     )
   }

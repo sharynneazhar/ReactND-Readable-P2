@@ -15,10 +15,13 @@ class PostContainer extends Component {
 
   componentWillMount() {
     const category = this.props.match.params.category;
-    if (category) {
+    this.props.fetchPosts(category);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.category !== this.props.match.params.category) {
+      const category = nextProps.match.params.category;
       this.props.fetchPosts(category);
-    } else {
-      this.props.fetchPosts();
     }
   }
 
